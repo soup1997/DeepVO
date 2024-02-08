@@ -159,7 +159,7 @@ class DeepVO(nn.Module):
 
         return r_rmse, p_rmse
 
-    def normalize(self, x):
+    def batch_normalize(self, x):
         x_reshaped = x.view(-1, 3, 192, 640)
         rgb_mean = x_reshaped.mean(dim=(0, 2, 3)).view(1, 1, 3, 1, 1)
         rgb_std = x_reshaped.std(dim=(0, 2, 3)).view(1, 1, 3, 1, 1)
@@ -169,7 +169,7 @@ class DeepVO(nn.Module):
         return x
 
     def forward(self, x):
-        x = self.normalize(x)
+        x = self.batch_normalize(x)
         
         x = torch.cat((x[:, :-1, :, :, :], x[:, 1:, :, :, :]), dim=2) # torch.Size([B=8, L=4, C=6, H=192, W=640])
         batch_size = x.size(0)
