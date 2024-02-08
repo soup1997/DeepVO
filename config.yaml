@@ -1,0 +1,17 @@
+model_save_path: "./trained/"
+result_path: "./results/"
+dataset_path: "/home/smeet/catkin_ws/src/Visual-Inertial-Odometry/Dataset/"
+
+MODEL:
+  height: 192
+  width: 640
+  lstm_seq_len: 7
+
+HYPER_PARAMS:
+  epochs: 300
+  batch_size: 8
+  weight_decay: 0.000005
+  lr: 0.0001
+  lr_decay_factor: 0.95
+  lr_step: 20
+  save_step: 10
